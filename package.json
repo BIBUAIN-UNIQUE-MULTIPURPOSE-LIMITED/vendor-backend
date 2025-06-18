@@ -12,7 +12,7 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write . && git add .",
     "pre-commit": "lint-staged",
-    "lint:strict": "eslint 'src --ext .ts --max-warnings=0",
+    "lint:strict": "eslint src --ext .ts --max-warnings=0",
     "typecheck:strict": "tsc --noEmit --strict",
     "audit": "npm run lint:strict && npm run typecheck:strict",
     "prepare": "husky",
