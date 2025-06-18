@@ -1,0 +1,39 @@
+echo "🔍 Running pre-commit checks..."
+
+# 1. Type checking first (fastest failure)
+echo "📋 Type checking..."
+if ! npm run type-check; then
+  echo "❌ Type check failed. Aborting commit."
+  exit 1
+fi
+
+# 2. Linting and formatting
+echo "🔧 Running lint-staged..."
+if ! npx lint-staged; then
+  echo "❌ Linting/formatting failed. Aborting commit."
+  exit 1
+fi
+
+# 3. Run Lint
+echo "🔧 Running lint-staged..."
+if ! npm run lint; then
+  echo "❌ Linting failed, fix up errors and try again. Aborting commit."
+  exit 1
+fi
+
+# 4. Test
+echo "🔧 Running lint-staged..."
+if ! npm run test; then
+  echo "❌ Linting/formatting failed. Aborting commit."
+  exit 1
+fi
+
+# 5. Check for staged changes (from formatting)
+if git diff --cached --quiet; then
+  echo "✅ No formatting changes needed."
+else
+  echo "✨ Code was formatted. Adding changes to commit..."
+  git add -u
+fi
+
+echo "🚀 Pre-commit checks passed!"
