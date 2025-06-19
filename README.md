@@ -25,16 +25,20 @@ vendor-backend/
 # Getting Started 
 
 # To use Docker
-Build image: ``` docker build -t ts-express-app . ```
+Build image: ``` docker build -t bibuain-app . ```
 
 List image: ``` docker images ```
 
 List running service ``` docker ps ```
 
-Run the image: ``` docker run -p 3000:3000 ts-express-app ```
+Stop running: docker stop <container-id> 
+// or
+docker kill <container-id>
+
+Run the image: ``` docker run -p 3000:3000 bibuain-app ```
 // You can now access your server on http://localhost:3000
 
-Remove images: ``` docker image remove ts-express-app ```
+Remove images: ``` docker image remove bibuain-app ```
 
 # Normal way
 ```
