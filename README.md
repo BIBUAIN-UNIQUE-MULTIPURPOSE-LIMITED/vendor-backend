@@ -56,6 +56,8 @@ Run the image: ``` docker run -p 3000:3000 bibuain-app ```
 
 Remove images: ``` docker image remove bibuain-app ```
 
+Debugging: docker build -t bibuain-app . --no-cache --progress=plain
+
 # Normal way
 ```
 npm install

@@ -7,8 +7,11 @@ WORKDIR /src
 COPY package*.json ./
 RUN npm ci
 
-# Copy TS sources
+# Copy source code AND Prisma schema
 COPY . .
+
+# Generate Prisma client
+RUN npx prisma generate
 
 # Build the TypeScript code
 RUN npm run build
@@ -26,12 +29,16 @@ WORKDIR /
 COPY package*.json ./
 RUN npm ci --omit=dev --ignore-scripts
 
-# the compiled code
+# Copy Prisma schema for client generation
+COPY prisma ./prisma
+
+# Generate Prisma client in production
+RUN npx prisma generate --no-engine
+
+# Copy the compiled code
 COPY --from=builder /src/dist ./dist
 
-# static assets at project root (e.g. public/):
-# COPY --from=builder /src/public ./public
-
 EXPOSE 3000
-# your start script: "node dist/server.js"
-CMD ["npm", "start"]
+
+# Run migrations and start the app
+CMD ["npm", "run", "start:prod"]
