@@ -15,9 +15,12 @@
     "lint:strict": "eslint src --ext .ts --max-warnings=0",
     "typecheck:strict": "tsc --noEmit --strict",
     "audit": "npm run lint:strict && npm run typecheck:strict",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:generate": "prisma generate"
   },
   "lint-staged": {
     "*.{ts,js}": [
@@ -37,6 +40,8 @@
   },
   "homepage": "https://github.com/BIBUAIN-UNIQUE-MULTIPURPOSE-LIMITED/vendor-backend#readme",
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.3",
@@ -48,12 +53,16 @@
     "nodemon": "^3.1.10",
     "npm": "^11.4.2",
     "prettier": "^3.5.3",
+    "prisma": "^6.10.1",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@prisma/client": "^6.10.1",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "eslint-plugin-sonarjs": "^3.0.3",
     "express": "^5.1.0"

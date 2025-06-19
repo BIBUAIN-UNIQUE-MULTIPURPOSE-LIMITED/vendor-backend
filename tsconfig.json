@@ -12,6 +12,6 @@
     "sourceMap": true,
     "inlineSources": true
   },
-  "include": ["src"],
+  "include": ["src", "prisma", "tests"],
   "exclude": ["node_modules", "dist"]
 }

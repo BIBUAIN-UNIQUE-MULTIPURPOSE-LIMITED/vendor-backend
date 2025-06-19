@@ -1,26 +1,42 @@
 vendor-backend/
+|--prisma
+| ├── schema.prisma // Define models inside schema.prisma file
+│ │ 
+| |── migrations/
+|
 ├── src/
 │ ├── config/
 │ │ └── config.ts // Load and type environment variables
+| |
+| | └── database.ts 
+|
 │ ├── controllers/
-│ │ └── itemController.ts // CRUD logic for "items"
+│ │ └── <controllers files> // All controller files will be here
+|
 │ ├── middlewares/
 │ │ └── errorHandler.ts // Global typed error handling middleware
-│ ├── models/
-│ │ └── item.ts // Define item type and in-memory storage
+| |
 │ ├── routes/
-│ │ └── itemRoutes.ts // Express routes for items
-│ ├── app.ts // Express app configuration (middlewares, routes)
-│ └── server.ts // Start the server
+│ │ └── <route files> // All routes files will be here
+|
 │ ├── services/
-│ │ └── item.ts // Define item type and in-memory storage
+│ │ └── <service files>
+|
 │ ├── utils/
-│ │ └── item.ts // Define item type and in-memory storage
+│ │ └─ <utils files>
+|
+│ ├── app.ts // Express app configuration (middlewares, routes)
+| |
+│ └── server.ts // Start the server
+|
+|-- test/
+| |__ <test files>
+|
 ├── .env // Environment variables
 ├── package.json // Project scripts, dependencies, etc.
 ├── tsconfig.json // TypeScript configuration
-├── .eslintrc.js // ESLint configuration
-└── .prettierrc // Prettier configuration
+
+
 
 # Getting Started 
 
@@ -46,3 +62,8 @@ npm install
 
 npm run dev
 ```
+Run prisma dev to start a local Prisma Postgres server.
+
+npm run prisma:migrate    
+
+Run prisma migrate dev to migrate your local Prisma Postgres database.
