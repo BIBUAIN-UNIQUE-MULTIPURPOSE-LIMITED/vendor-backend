@@ -1,7 +1,7 @@
 # Builder stage — compile TS from /src → produces /dist
 FROM node:22-alpine AS builder
 
-WORKDIR /src
+WORKDIR /app
 
 # Install all deps (dev+prod)
 COPY package*.json ./
@@ -23,7 +23,7 @@ FROM node:22-alpine AS runtime
 ENV NODE_ENV=production
 
 # work directory for runtime
-WORKDIR /
+WORKDIR /app
 
 # install production deps
 COPY package*.json ./
@@ -35,8 +35,11 @@ COPY prisma ./prisma
 # Generate Prisma client in production
 RUN npx prisma generate --no-engine
 
+# Copy tsconfig.json if you have one
+COPY tsconfig.json ./
+
 # Copy the compiled code
-COPY --from=builder /src/dist ./dist
+COPY --from=builder /app/dist ./dist
 
 EXPOSE 3000
 

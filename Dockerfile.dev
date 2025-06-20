@@ -1,0 +1,23 @@
+FROM node:22-alpine
+
+WORKDIR /app
+
+# Install dependencies including TypeScript and ts-node
+COPY package*.json ./
+RUN npm ci
+
+# Install ts-node and typescript as dev dependencies if not already in package.json
+RUN npm install -D ts-node typescript @types/node
+
+# Prisma setup
+COPY prisma ./prisma
+RUN npx prisma generate
+
+# Copy tsconfig.json if you have one
+COPY tsconfig.json ./
+
+# Copy your app code
+COPY src ./src
+
+EXPOSE 3000
+CMD ["npm", "run", "dev"]
