@@ -41,7 +41,7 @@ COPY tsconfig.json ./
 # Copy the compiled code
 COPY --from=builder /app/dist ./dist
 
-EXPOSE 3000
+EXPOSE 8000
 
 # Run migrations and start the app
 CMD ["npm", "run", "start:prod"]
