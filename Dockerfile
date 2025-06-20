@@ -35,9 +35,6 @@ COPY prisma ./prisma
 # Generate Prisma client in production
 RUN npx prisma generate --no-engine
 
-# Copy tsconfig.json if you have one
-COPY tsconfig.json ./
-
 # Copy the compiled code
 COPY --from=builder /app/dist ./dist
 

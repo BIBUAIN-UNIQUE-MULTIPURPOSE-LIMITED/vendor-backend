@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import prisma from '../config/database'; // assuming prisma client is exported here
+import prisma from '../config/database';
+import { getSocketIO } from '../socket/socketManager';
 
 // Create an item
 export const createItem = async (
@@ -12,6 +13,13 @@ export const createItem = async (
     const newItem = await prisma.item.create({
       data: { name },
     });
+    try {
+      const io = getSocketIO();
+      io.emit('itemCreated', newItem);
+      console.log(`io emitted successfully: ${newItem.name}`);
+    } catch (error) {
+      console.log('Socket not available:', error);
+    }
     res.status(201).json(newItem);
   } catch (error) {
     next(error);

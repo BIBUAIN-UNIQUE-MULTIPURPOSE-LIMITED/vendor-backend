@@ -31,9 +31,9 @@ vendor-backend/
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
+- Node.js (v18 or higher)
 - PostgreSQL database
-- Docker (optional)
+- Docker
 
 ## Docker Setup (Recommended)
 
@@ -65,6 +65,12 @@ vendor-backend/
 
    # Start all services
    docker-compose up -d
+
+   # View console logs
+   docker-compose logs vendor-backend -f
+
+   # Stop service
+   docker compose down
    ```
 
 ### Local Development Setup
